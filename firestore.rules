@@ -1,0 +1,105 @@
+rules_version = '2';
+
+// Security rules for the Autograph site.
+//
+// Paste these into the Firebase console under Firestore Database -> Rules and
+// hit Publish. They are what actually protects the data: the config values in
+// src/environments/environment.ts are public by design, so every restriction
+// that matters is enforced here, on Google's servers, where nobody can edit it
+// from a browser.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- who is who -------------------------------------------------------
+    // A signed-in account only counts as staff if it also has a document at
+    // staff/<uid> giving it a role. Roles are set by hand in the Firebase
+    // console; nothing in the app can grant itself access.
+
+    function staffRole() {
+      return get(/databases/$(database)/documents/staff/$(request.auth.uid)).data.role;
+    }
+
+    function hasStaffRecord() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/staff/$(request.auth.uid));
+    }
+
+    function isStaff() {
+      return hasStaffRecord() && staffRole() in ['manager', 'staff'];
+    }
+
+    function isManager() {
+      return hasStaffRecord() && staffRole() == 'manager';
+    }
+
+    function isValidReservation(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.phone is string && data.phone.size() > 0 && data.phone.size() <= 40
+        && data.date is string && data.date.size() == 10
+        && data.time is string && data.time.size() == 5
+        && data.guests is number && data.guests > 0 && data.guests <= 30
+        && data.tableId is number
+        && data.status == 'confirmed';
+    }
+
+    // ---- staff records ----------------------------------------------------
+    // You may read your own record (that is how the app learns your role) and
+    // nothing else. Creating and changing these is console-only.
+
+    match /staff/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // ---- the menu ---------------------------------------------------------
+    // Anyone may read it (it is a public restaurant menu). Only the manager
+    // may add, change or remove a dish.
+
+    match /meals/{mealId} {
+      allow read: if true;
+      allow create, update, delete: if isManager();
+    }
+
+    // ---- reservations -----------------------------------------------------
+    // Anyone may book a table, and a customer may cancel their own booking —
+    // but a cancellation is the ONLY change the public can make: the rule below
+    // rejects any update that touches a field other than "status", so a booking
+    // cannot be quietly rewritten (different name, time, table) by anyone
+    // outside the restaurant. Only staff may delete.
+
+    match /reservations/{reservationId} {
+      allow read: if true;
+      allow create: if isValidReservation(request.resource.data);
+      allow update: if isStaff()
+        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
+            && request.resource.data.status == 'cancelled');
+      allow delete: if isStaff();
+    }
+
+    // ---- table slot locks -------------------------------------------------
+    // One document per booked table/date/time, with an id built from those three
+    // values. Since a document id can exist only once, this is what makes
+    // double-booking impossible: two people submitting for the same table at the
+    // same instant both try to create the same id, and Firestore lets exactly
+    // one of them through.
+    //
+    // The public may create a lock (booking), release one (cancelling), or take
+    // over a lock that has already been released. Deleting outright is staff-only,
+    // so nobody can wipe the locks and re-open tables that are actually taken.
+
+    match /tableSlots/{slotId} {
+      allow read: if true;
+      allow create: if request.resource.data.cancelled == false;
+      allow update: if isStaff()
+        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['cancelled'])
+            && request.resource.data.cancelled == true)
+        || (resource.data.cancelled == true && request.resource.data.cancelled == false);
+      allow delete: if isStaff();
+    }
+
+    // Anything not named above is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

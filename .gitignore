@@ -40,3 +40,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Scratch / leftovers (not part of the app)
+/_to_delete
+/src/app/_to_delete
+*.bak
+*.log

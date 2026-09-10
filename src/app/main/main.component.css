@@ -1,58 +1,4 @@
  
-/*-----------------------------------------------------------------------HEADERS CSS---------------------------------------------------------------------------------------------------*/
-header {
-  width: 100%;
-  display: flex;
-  height: 16vh;
-  align-items: center;
-  justify-content: space-between;
-  transform: translateY(-100%);
-  opacity: 0;
-  animation: slideInFromTop 0.6s ease-out forwards;
-  animation-delay: 0.3s; 
-  z-index: 1000;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-.logo {
-  padding: 8px;
-  margin-left: 60px;
-  max-width: 200px;
-  margin-top: 20px;
-}
-
-nav {
-  display: flex;
-  gap: 20px;
-  font-size: 28px;
-  padding: 8px;
-  margin-right: 80px;
-}
-
-.flag {
-  width: 28px;
-  background: none;
-  border: 1px solid black;
-  cursor: pointer;
-}
-
-.flag svg {
-  border-radius: 4px;
-  border: 2px solid black;
-}
-
-nav a {
-  color: white;
-}
-
-nav a:hover {
-  color: wheat;
-  transition: 0.5s;cursor: pointer;
-}
-
 /*-----------------------------------------------------------------------MAIN PAGE CSS---------------------------------------------------------------------------------------------------*/
 
 main {
@@ -306,6 +252,31 @@ main {
   margin-top: 20px;
 }
 
+.menu-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 20px;
+  color: #cfc9c3;
+  font-size: 16px;
+}
+
+.menu-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid rgba(245, 222, 179, 0.25);
+  border-top-color: wheat;
+  animation: menu-spin 0.8s linear infinite;
+}
+
+@keyframes menu-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .menuitems {
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
@@ -316,6 +287,7 @@ main {
 }
 
 .menu-card {
+  position: relative;
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -339,16 +311,22 @@ main {
 
 .menu-img {
   width: 100%;
-  max-height: 180px;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
   border-radius: 8px;
-  
+  display: block;
 }
 
 .menu-details h3 {
   margin: 10px 0 5px;
   color: white;
-  font-size: 20px;
-  min-height: 6vh;
+  font-size: 17px;
+  line-height: 1.3;
+  min-height: 4.4vh;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .menu-details p {
@@ -362,15 +340,17 @@ main {
 }
 
 .description {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 1s ease, opacity 1s ease;
+  display: grid;
+  grid-template-rows: 0fr;
   opacity: 0;
-  transition: 0.5s;
+  margin-top: 0;
+  transition: grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease,
+              margin-top 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .description.visible {
-  max-height: 400px;
+  grid-template-rows: 1fr;
   opacity: 1;
   margin-top: 10px;
 }
@@ -380,7 +360,9 @@ main {
   margin: 0;
   line-height: 1.5;
   white-space: normal; 
-  word-break: break-word; 
+  word-break: break-word;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .arrow-icon {
@@ -548,7 +530,7 @@ footer img{
   }
 
   .menu-img {
-    max-height: 150px;
+    height: 150px;
   }
 
 }
@@ -709,13 +691,6 @@ footer img{
 }
 
 /*-----------------------------------------------------------------------KEYFRAMES FOR ANIMATIONS----------------------------------------------------------------------------------------------*/
-
-@keyframes slideInFromTop {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
 @keyframes slideFromRight {
   from {

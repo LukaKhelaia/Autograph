@@ -1,0 +1,209 @@
+<app-header></app-header>
+
+<main class="reserve-main">
+
+  <section class="reserve-hero">
+    <h1>{{ selectedLanguage === 'ka' ? 'მაგიდის დაჯავშნა' : 'Reserve a Table' }}</h1>
+    <p>{{ selectedLanguage === 'ka' ? 'აირჩიეთ თარიღი, დრო და სტუმრების რაოდენობა' : 'Pick a date, time and party size, and we\'ll hold a table for you.' }}</p>
+  </section>
+
+  <div class="view-tabs">
+    <button type="button" class="view-tab" [class.active]="viewMode === 'book'" (click)="switchToBook()">
+      {{ selectedLanguage === 'ka' ? 'დაჯავშნა' : 'Book a Table' }}
+    </button>
+    <button type="button" class="view-tab" [class.active]="viewMode === 'lookup'" (click)="switchToLookup()">
+      {{ selectedLanguage === 'ka' ? 'ჩემი ჯავშნები' : 'My Reservations' }}
+    </button>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <section class="reserve-card success-card" *ngIf="viewMode === 'book' && submitted">
+    <div class="success-icon">&#10003;</div>
+    <h2>{{ selectedLanguage === 'ka' ? 'დაჯავშნა დადასტურებულია!' : 'Reservation Confirmed!' }}</h2>
+    <p>
+      {{ selectedLanguage === 'ka' ? 'გმადლობთ' : 'Thank you' }}, {{ name }} —
+      {{ selectedLanguage === 'ka' ? 'გელით' : 'we\'ll see you on' }}
+      {{ selectedDate }} {{ selectedLanguage === 'ka' ? 'დროს' : 'at' }} {{ selectedTime }}
+      ({{ guests }} {{ selectedLanguage === 'ka' ? 'სტუმარი' : (guests === 1 ? 'guest' : 'guests') }}).
+    </p>
+    <button class="primary-btn" (click)="startNewReservation()">
+      {{ selectedLanguage === 'ka' ? 'ახალი დაჯავშნა' : 'Make Another Reservation' }}
+    </button>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section class="reserve-card" *ngIf="viewMode === 'book' && !submitted">
+
+    <!-- DATE -->
+    <div class="form-block">
+      <label class="block-label">{{ selectedLanguage === 'ka' ? 'თარიღი' : 'Date' }}</label>
+      <div class="chip-row">
+        <button
+          *ngFor="let d of dateOptions"
+          type="button"
+          class="chip date-chip"
+          [class.active]="selectedDate === d.value"
+          (click)="selectDate(d.value)"
+        >
+          <span class="chip-top">{{ d.dayLabel }}</span>
+          <span class="chip-bottom">{{ d.dateLabel }} {{ d.monthLabel }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TIME -->
+    <div class="form-block">
+      <label class="block-label">{{ selectedLanguage === 'ka' ? 'დრო' : 'Time' }}</label>
+      <div class="chip-row wrap" *ngIf="availableTimeSlots.length; else noTimes">
+        <button
+          *ngFor="let t of availableTimeSlots"
+          type="button"
+          class="chip time-chip"
+          [class.active]="selectedTime === t"
+          (click)="selectTime(t)"
+        >
+          {{ t }}
+        </button>
+      </div>
+      <ng-template #noTimes>
+        <p class="hint-text">{{ selectedLanguage === 'ka' ? 'დღეს აღარ არის ხელმისაწვდომი დრო' : 'No more time slots available today — try another date.' }}</p>
+      </ng-template>
+    </div>
+
+    <!-- GUESTS -->
+    <div class="form-block">
+      <label class="block-label">{{ selectedLanguage === 'ka' ? 'სტუმრები' : 'Guests' }}</label>
+      <div class="guests-stepper">
+        <button type="button" class="stepper-btn" (click)="changeGuests(-1)" [disabled]="guests <= 1">&minus;</button>
+        <span class="guests-count">{{ guests }}</span>
+        <button type="button" class="stepper-btn" (click)="changeGuests(1)">&plus;</button>
+      </div>
+      <p class="hint-text warning" *ngIf="partyTooLarge">
+        {{ selectedLanguage === 'ka' ? 'დიდი ჯგუფებისთვის დაგვირეკეთ' : 'For parties larger than ' + maxCapacity + ', please call us at' }} 555 13 12 13.
+      </p>
+    </div>
+
+    <!-- TABLES -->
+    <!-- This block stays in the layout even before a time is picked. Hiding it
+         entirely made everything below it (including the Reserve button) jump
+         up and down as you moved through the form. -->
+    <div class="form-block tables-block" *ngIf="!partyTooLarge">
+      <label class="block-label">{{ selectedLanguage === 'ka' ? 'ხელმისაწვდომი მაგიდები' : 'Available Tables' }}</label>
+
+      <p class="hint-text" *ngIf="!selectedTime">
+        {{ selectedLanguage === 'ka' ? 'აირჩიეთ დრო, რომ ნახოთ ხელმისაწვდომი მაგიდები' : 'Pick a time above to see which tables are free.' }}
+      </p>
+
+      <p class="hint-text" *ngIf="selectedTime && loadingAvailability">{{ selectedLanguage === 'ka' ? 'იტვირთება...' : 'Checking availability…' }}</p>
+
+      <p class="hint-text error" *ngIf="selectedTime && availabilityError">{{ availabilityError }}</p>
+
+      <p class="hint-text" *ngIf="selectedTime && !loadingAvailability && !availabilityError && availableTables.length === 0">
+        {{ selectedLanguage === 'ka' ? 'ამ დროისთვის მაგიდები არ არის ხელმისაწვდომი' : 'No tables free for that date, time and party size — try a different time.' }}
+      </p>
+
+      <div class="chip-row wrap" *ngIf="selectedTime && !loadingAvailability && availableTables.length > 0">
+        <button
+          *ngFor="let table of availableTables"
+          type="button"
+          class="chip table-chip"
+          [class.active]="selectedTableId === table.id"
+          (click)="selectTable(table.id)"
+        >
+          {{ table.label }}
+          <span class="table-capacity">{{ selectedLanguage === 'ka' ? ('სავარძ ' + table.capacity) : (table.capacity + ' seats') }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTACT DETAILS -->
+    <div class="form-block" *ngIf="selectedTableId">
+      <label class="block-label">{{ selectedLanguage === 'ka' ? 'საკონტაქტო ინფორმაცია' : 'Your Details' }}</label>
+      <div class="contact-grid">
+        <input type="text" [(ngModel)]="name" name="name" placeholder="{{ selectedLanguage === 'ka' ? 'სახელი' : 'Full Name' }}" required />
+        <input type="tel" [(ngModel)]="phone" name="phone" placeholder="{{ selectedLanguage === 'ka' ? 'ტელეფონი' : 'Phone Number' }}" required />
+        <input type="email" [(ngModel)]="email" name="email" placeholder="{{ selectedLanguage === 'ka' ? 'ელფოსტა (არასავალდებულო)' : 'Email (optional)' }}" />
+        <textarea [(ngModel)]="notes" name="notes" placeholder="{{ selectedLanguage === 'ka' ? 'განსაკუთრებული მოთხოვნები (არასავალდებულო)' : 'Special requests (optional)' }}" rows="3"></textarea>
+      </div>
+    </div>
+
+    <p class="hint-text error" *ngIf="submitError">{{ submitError }}</p>
+
+    <button
+      class="primary-btn submit-btn"
+      type="button"
+      [disabled]="!canSubmit || submitting"
+      (click)="submitReservation()"
+    >
+      {{ submitting
+        ? (selectedLanguage === 'ka' ? 'იგზავნება...' : 'Booking…')
+        : (selectedLanguage === 'ka' ? 'მაგიდის დაჯავშნა' : 'Reserve Table') }}
+    </button>
+
+  </section>
+
+  <!-- MY RESERVATIONS LOOKUP -->
+  <section class="reserve-card" *ngIf="viewMode === 'lookup'">
+
+    <div class="lookup-row">
+      <input
+        type="tel"
+        [(ngModel)]="lookupPhone"
+        name="lookupPhone"
+        placeholder="{{ selectedLanguage === 'ka' ? 'ტელეფონის ნომერი' : 'Phone Number' }}"
+        (keyup.enter)="lookupSearch()"
+      />
+      <button class="primary-btn" type="button" (click)="lookupSearch()" [disabled]="lookupLoading">
+        {{ lookupLoading
+          ? (selectedLanguage === 'ka' ? 'იძებნება...' : 'Searching…')
+          : (selectedLanguage === 'ka' ? 'ძებნა' : 'Find My Reservations') }}
+      </button>
+    </div>
+
+    <p class="hint-text error" *ngIf="lookupError">{{ lookupError }}</p>
+
+    <ng-container *ngIf="lookupSearched && !lookupLoading">
+      <p class="hint-text" *ngIf="lookupResults.length === 0 && !lookupError">
+        {{ selectedLanguage === 'ka' ? 'ამ ნომერზე ჯავშანი ვერ მოიძებნა' : 'No reservations found for that phone number.' }}
+      </p>
+
+      <div class="reservation-list" *ngIf="lookupResults.length > 0">
+        <div
+          class="reservation-item"
+          *ngFor="let r of lookupResults"
+          [class.cancelled]="r.status === 'cancelled'"
+          [class.past]="isPast(r)"
+        >
+          <div class="reservation-main">
+            <span class="reservation-date">{{ r.date }} · {{ r.time }}</span>
+            <span class="reservation-meta">
+              {{ r.guests }} {{ selectedLanguage === 'ka' ? 'სტუმარი' : (r.guests === 1 ? 'guest' : 'guests') }} · Table {{ r.tableId }}
+            </span>
+            <span class="reservation-status" *ngIf="r.status === 'cancelled'">
+              {{ selectedLanguage === 'ka' ? 'გაუქმებულია' : 'Cancelled' }}
+            </span>
+            <span class="reservation-status past" *ngIf="r.status !== 'cancelled' && isPast(r)">
+              {{ selectedLanguage === 'ka' ? 'დასრულებულია' : 'Past' }}
+            </span>
+          </div>
+
+          <p class="reservation-notes" *ngIf="r.notes">{{ r.notes }}</p>
+
+          <button
+            class="cancel-btn"
+            type="button"
+            *ngIf="r.status !== 'cancelled' && !isPast(r)"
+            [disabled]="cancellingId === r.id"
+            (click)="cancelReservation(r)"
+          >
+            {{ cancellingId === r.id
+              ? (selectedLanguage === 'ka' ? 'უქმდება...' : 'Cancelling…')
+              : (selectedLanguage === 'ka' ? 'გაუქმება' : 'Cancel Reservation') }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+  </section>
+
+</main>

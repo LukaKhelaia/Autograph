@@ -1,0 +1,248 @@
+/*-----------------------------------------------------------------------HEADER CSS---------------------------------------------------------------------------------------------------*/
+header {
+  width: 100%;
+  display: flex;
+  height: 16vh;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-100%);
+  opacity: 0;
+  animation: slideInFromTop 0.6s ease-out forwards;
+  animation-delay: 0.3s;
+  z-index: 1000;
+  position: relative;
+}
+
+@keyframes slideInFromTop {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Drops the transform once the entrance animation ends (see onHeaderAnimationEnd) so
+   header no longer acts as a containing block for the fixed mobile-nav drawer/backdrop. */
+header.entered {
+  animation: none;
+  transform: none;
+  opacity: 1;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.logo {
+  padding: 8px;
+  margin-left: 60px;
+  max-width: 200px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 28px;
+  padding: 8px;
+  margin-right: 80px;
+}
+
+.flag {
+  width: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.flag svg {
+  border-radius: 4px;
+}
+
+nav a {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: wheat;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+nav a.active-link {
+  color: wheat;
+  border-bottom: 2px solid wheat;
+  padding-bottom: 4px;
+}
+
+/* Hamburger button — hidden on wide screens */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  margin-right: 30px;
+  z-index: 1100;
+}
+
+.burger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background-color: wheat;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Backdrop shown behind the sliding mobile nav drawer */
+.nav-backdrop {
+  display: none;
+}
+
+/* Between the full desktop layout and the burger breakpoint below, the nav kept
+   its full 28px desktop type and wide margins, which crowds the header once the
+   window narrows. Scale it through that middle range so it stays in proportion. */
+@media (max-width: 1100px) {
+  nav {
+    font-size: 22px;
+    gap: 16px;
+    margin-right: 40px;
+  }
+
+  .logo {
+    margin-left: 30px;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 950px) {
+  nav {
+    font-size: 19px;
+    gap: 14px;
+    margin-right: 28px;
+  }
+
+  .logo {
+    margin-left: 24px;
+    max-width: 140px;
+  }
+}
+
+/* Responsive: collapse the nav into a burger-triggered drawer that slides in from the right */
+@media (max-width: 860px) {
+  .burger {
+    display: flex;
+    /* The logo artwork sits within a square image that has extra transparent
+       padding, especially below the crest+wordmark, so its visual center sits
+       higher than the image box's geometric center. Nudge the burger down from
+       a flex-start baseline to that visual center instead of relying on
+       align-items: center, which would align it to the emptier full box.
+       (Now that .logo-link crops out that transparent padding, the visible
+       logo is shorter and its center sits higher, so this needs less of a
+       nudge than before.) */
+    align-self: flex-start;
+    margin-top: 20px;
+  }
+
+  header {
+    height: auto;
+    padding: 18px 0;
+  }
+
+  /* The logo artwork (crest + "AUTOGRAPH" wordmark) only fills the middle
+     ~57% of its square source image — the rest is transparent padding.
+     Left uncropped that dead space makes the whole header look oversized on
+     mobile, so clip the link down to just the visible band and shift the
+     image up to fill it. */
+  .logo-link {
+    display: block;
+    overflow: hidden;
+    height: 80px;
+  }
+
+  .logo {
+    margin-left: 20px;
+    max-width: 140px;
+    margin-top: -24px;
+  }
+
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 1050;
+  }
+
+  .nav-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: min(280px, 78vw);
+    height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    margin: 0;
+    padding: 90px 30px 24px;
+    font-size: 20px;
+    background-color: rgb(20, 22, 23);
+    border-left: 1px solid wheat;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 1090;
+  }
+
+  /* Sits at the left edge of the drawer, on the same horizontal row as the
+     burger/close button in the top-right of the header, instead of taking
+     a slot in the link list below. */
+  nav .flag {
+    position: absolute;
+    top: 48px;
+    left: 30px;
+    width: 20px;
+  }
+
+  nav.mobile-open {
+    transform: translateX(0);
+  }
+
+  nav a.active-link {
+    border-bottom: none;
+    padding-bottom: 0;
+    padding-left: 10px;
+    border-left: 3px solid wheat;
+  }
+}

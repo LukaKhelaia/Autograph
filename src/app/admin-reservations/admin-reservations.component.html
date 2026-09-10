@@ -1,0 +1,111 @@
+<app-panel-auth
+  requiredRole="staff"
+  panelTitle="Staff Login"
+  panelSubtitle="Sign in with your staff account to view today's reservations."
+>
+<div class="panel">
+
+  <div class="panel-header">
+    <div>
+      <h1>Reservations</h1>
+      <p class="subtitle">Live bookings coming in from the website</p>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="refresh-btn" (click)="fetchReservations()" [disabled]="loading">
+        {{ loading ? 'Refreshing…' : 'Refresh' }}
+      </button>
+    </div>
+  </div>
+
+  <p class="last-updated" *ngIf="lastUpdated">Last updated {{ lastUpdated | date:'shortTime' }}</p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-number">{{ todayCount }}</span>
+      <span class="stat-label">Today</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ upcomingCount }}</span>
+      <span class="stat-label">Upcoming</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ cancelledCount }}</span>
+      <span class="stat-label">Cancelled</span>
+    </div>
+  </div>
+
+  <div class="filter-tabs">
+    <button type="button" class="filter-tab" [class.active]="filter === 'upcoming'" (click)="setFilter('upcoming')">Upcoming</button>
+    <button type="button" class="filter-tab" [class.active]="filter === 'today'" (click)="setFilter('today')">Today</button>
+    <button type="button" class="filter-tab" [class.active]="filter === 'cancelled'" (click)="setFilter('cancelled')">Cancelled</button>
+    <button type="button" class="filter-tab" [class.active]="filter === 'all'" (click)="setFilter('all')">All</button>
+  </div>
+
+  <p class="hint-text error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <p class="hint-text" *ngIf="loading && !allReservations.length">Loading reservations…</p>
+
+  <p class="hint-text" *ngIf="!loading && filteredReservations.length === 0 && !errorMessage">
+    No reservations in this view.
+  </p>
+
+  <div class="reservation-table" *ngIf="filteredReservations.length > 0">
+    <div class="table-row table-head">
+      <span>Date &amp; Time</span>
+      <span>Guest</span>
+      <span>Contact</span>
+      <span>Party</span>
+      <span>Table</span>
+      <span>Notes</span>
+      <span>Status</span>
+      <span>Actions</span>
+    </div>
+
+    <div
+      class="table-row"
+      *ngFor="let r of filteredReservations"
+      [class.cancelled]="r.status === 'cancelled'"
+      [class.past]="isPast(r) && r.status !== 'cancelled'"
+      [class.today]="isToday(r) && r.status !== 'cancelled'"
+    >
+      <span class="cell-datetime">
+        <strong>{{ r.date }}</strong>
+        <span>{{ r.time }}</span>
+      </span>
+      <span class="cell-name">{{ r.name }}</span>
+      <span class="cell-contact">
+        <span>{{ r.phone }}</span>
+        <span class="email" *ngIf="r.email">{{ r.email }}</span>
+      </span>
+      <span>{{ r.guests }}</span>
+      <span>Table {{ r.tableId }}</span>
+      <span class="cell-notes">{{ r.notes || '—' }}</span>
+      <span>
+        <span class="status-badge" [class.cancelled]="r.status === 'cancelled'" [class.today]="isToday(r) && r.status !== 'cancelled'">
+          {{ r.status === 'cancelled' ? 'Cancelled' : (isPast(r) ? 'Past' : (isToday(r) ? 'Today' : 'Confirmed')) }}
+        </span>
+      </span>
+      <span class="cell-actions">
+        <button
+          type="button"
+          class="action-btn cancel"
+          *ngIf="r.status !== 'cancelled'"
+          [disabled]="cancellingId === r.id"
+          (click)="cancelReservation(r)"
+        >
+          {{ cancellingId === r.id ? 'Cancelling…' : 'Cancel' }}
+        </button>
+        <button
+          type="button"
+          class="action-btn delete"
+          [disabled]="deletingId === r.id"
+          (click)="deleteReservation(r)"
+        >
+          {{ deletingId === r.id ? 'Deleting…' : 'Delete' }}
+        </button>
+      </span>
+    </div>
+  </div>
+
+</div>
+</app-panel-auth>

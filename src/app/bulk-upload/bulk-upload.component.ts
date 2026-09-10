@@ -78,8 +78,26 @@ export class BulkUploadComponent implements OnInit {
     });
   }
 
-  // Trigger image update logic (if defined in AdminService)
+  // Replaces the photo on every meal with the placeholder image. Harmless back
+  // when this pointed at throwaway test data, but it now rewrites the real menu,
+  // so it asks first.
   updateImages() {
-    this.adminService.updateAllMealImages();
+    const proceed = confirm('This replaces the photo on EVERY meal with the placeholder image. Continue?');
+    if (!proceed) {
+      return;
+    }
+
+    this.loading = true;
+    this.message = '';
+    this.adminService.setAllMealImages('assets/food.jpg').subscribe({
+      next: (count) => {
+        this.loading = false;
+        this.message = `Updated ${count} meal images.`;
+      },
+      error: () => {
+        this.loading = false;
+        this.message = 'Could not update the images.';
+      }
+    });
   }
 }

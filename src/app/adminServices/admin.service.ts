@@ -1,60 +1,94 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concatMap, delay, from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc, writeBatch } from 'firebase/firestore';
 import { MenuItem } from '../services/menu.model';
+import { db, isBrowser } from '../services/firebase';
+import { sortMenuItems } from '../services/menu-order';
 
+// Menu management, used by the manager's admin panel. Writing here is gated by
+// the Firestore rules: only a signed-in account whose staff record says
+// role === 'manager' can add, edit or delete a meal.
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-// Base API URL for all meal operations
-private apiUrl = 'https://68433875e1347494c31f7422.mockapi.io/meal';
+  private get mealsRef() {
+    return collection(db(), 'meals');
+  }
 
-constructor(private http: HttpClient) {}
+  // Fetch every menu item, in menu order.
+  getAllMenus(): Observable<MenuItem[]> {
+    if (!isBrowser()) {
+      return of([]);
+    }
 
-// Fetch all menu items from the API
-getAllMenus(): Observable<MenuItem[]> {
-  return this.http.get<MenuItem[]>(this.apiUrl);
-}
+    const load = async (): Promise<MenuItem[]> => {
+      const snapshot = await getDocs(this.mealsRef);
+      return sortMenuItems(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as MenuItem)));
+    };
 
-// Add a new menu item to the backend
-addMenu(menu: MenuItem): Observable<any> {
-  return this.http.post(`${this.apiUrl}`, menu);
-}
+    return from(load());
+  }
 
-// Update an existing menu item by ID
-updateMenu(id: string, menu: MenuItem): Observable<any> {
-  return this.http.put(`${this.apiUrl}/${id}`, menu);
-}
+  // Add a new menu item. New items sort to the end of their category by default.
+  addMenu(menu: MenuItem): Observable<string> {
+    const create = async (): Promise<string> => {
+      const payload = this.toDocument(menu);
+      const created = await addDoc(this.mealsRef, {
+        ...payload,
+        sortOrder: payload['sortOrder'] ?? Date.now()
+      });
+      return created.id;
+    };
 
-// Delete a menu item by ID
-deleteMenu(id: string): Observable<any> {
-  return this.http.delete(`${this.apiUrl}/${id}`);
-}
+    return from(create());
+  }
 
-// Update the image URL of all meals to a static image
-updateAllMealImages() {
-  this.http.get<any[]>(this.apiUrl).subscribe(meals => {
+  // Update an existing menu item by its Firestore document id.
+  updateMenu(id: string, menu: MenuItem): Observable<void> {
+    return from(updateDoc(doc(db(), 'meals', id), this.toDocument(menu)));
+  }
 
-    // Iterate through each meal one-by-one with delay between requests
-    from(meals).pipe(
-      concatMap(meal => {
-        const { id, ...mealData } = meal;
+  // Delete a menu item by its Firestore document id.
+  deleteMenu(id: string): Observable<void> {
+    return from(deleteDoc(doc(db(), 'meals', id)));
+  }
 
-        // Replace image with a fixed path
-        const updatedMeal = { ...mealData, image: 'assets/food.jpg' };
+  // Development helper carried over from the original build: points every meal
+  // at the same placeholder image. This rewrites real menu photos, so the page
+  // that offers it asks for confirmation first.
+  setAllMealImages(image: string): Observable<number> {
+    const run = async (): Promise<number> => {
+      const database = db();
+      const snapshot = await getDocs(collection(database, 'meals'));
+      const chunkSize = 400;
 
-        // Send PUT request to update meal
-        return this.http.put(`${this.apiUrl}/${id}`, updatedMeal).pipe(
-        delay(300) // 300 ms delay to avoid overloading API
-        );
-      })
-    ).subscribe(
-      () => console.log('✅ Meal updated'),
-      error => console.error('❌ Failed to update a meal', error),
-      () => console.log('🎉 All meals updated!')
-    );
-  });
-}
+      for (let start = 0; start < snapshot.docs.length; start += chunkSize) {
+        const batch = writeBatch(database);
+        snapshot.docs.slice(start, start + chunkSize).forEach(mealDoc => {
+          batch.update(mealDoc.ref, { image });
+        });
+        await batch.commit();
+      }
+
+      return snapshot.docs.length;
+    };
+
+    return from(run());
+  }
+
+  // The document id lives on the document itself in Firestore, and
+  // showDescription is a UI-only flag — neither belongs in the stored data.
+  private toDocument(menu: MenuItem): Record<string, any> {
+    const { id, showDescription, ...rest } = menu as MenuItem & { sortOrder?: number };
+    return {
+      ...rest,
+      name: (rest.name ?? '').trim(),
+      nameKa: (rest.nameKa ?? '').trim(),
+      description: (rest.description ?? '').trim(),
+      category: (rest.category ?? '').trim(),
+      price: Number(rest.price) || 0
+    };
+  }
 }

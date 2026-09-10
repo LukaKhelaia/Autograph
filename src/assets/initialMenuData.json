@@ -2,691 +2,680 @@
   {
     "name": "salads.cucumberTomato",
     "price": 10,
-    "image": "https://example.com/images/cucumberTomato.jpg",
+    "image": "https://images.pexels.com/photos/20070119/pexels-photo-20070119.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Fresh cucumber and tomato salad",
     "category": "Salads"
   },
   {
     "name": "salads.cucumberTomatoWalnut",
     "price": 14,
-    "image": "https://example.com/images/cucumberTomatoWalnut.jpg",
+    "image": "https://images.pexels.com/photos/37296768/pexels-photo-37296768.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Cucumber and tomato salad with walnuts",
     "category": "Salads"
   },
   {
     "name": "salads.caesarChicken",
     "price": 26,
-    "image": "https://example.com/images/caesarChicken.jpg",
+    "image": "https://images.pexels.com/photos/20321601/pexels-photo-20321601.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic Caesar salad with chicken",
     "category": "Salads"
   },
   {
     "name": "salads.caesarShrimp",
     "price": 32,
-    "image": "https://example.com/images/caesarShrimp.jpg",
+    "image": "https://images.pexels.com/photos/4669306/pexels-photo-4669306.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Caesar salad with shrimp",
     "category": "Salads"
   },
   {
     "name": "salads.greek",
     "price": 18,
-    "image": "https://example.com/images/greek.jpg",
+    "image": "https://images.pexels.com/photos/38268886/pexels-photo-38268886.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Traditional Greek salad with feta cheese",
     "category": "Salads"
   },
   {
     "name": "salads.chickenSalad",
     "price": 16.5,
-    "image": "https://example.com/images/chickenSalad.jpg",
+    "image": "https://images.pexels.com/photos/5950811/pexels-photo-5950811.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Chicken salad with vegetables",
     "category": "Salads"
   },
   {
     "name": "salads.eggplantCheeseChili",
     "price": 20,
-    "image": "https://example.com/images/eggplantCheeseChili.jpg",
+    "image": "https://images.pexels.com/photos/26736315/pexels-photo-26736315.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Eggplant salad with melted cheese and chili sauce",
     "category": "Salads"
   },
   {
     "name": "coldDishes.eggplantRolls",
     "price": 15,
-    "image": "https://example.com/images/eggplantRolls.jpg",
+    "image": "https://images.pexels.com/photos/15059720/pexels-photo-15059720.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Eggplant rolls filled with walnut paste",
     "category": "Cold Dishes"
   },
   {
     "name": "coldDishes.imeretianCheese",
     "price": 11.5,
-    "image": "https://example.com/images/imeretianCheese.jpg",
+    "image": "https://images.pexels.com/photos/8250343/pexels-photo-8250343.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Traditional Imeretian cheese",
     "category": "Cold Dishes"
   },
   {
     "name": "coldDishes.sulguni",
     "price": 13.5,
-    "image": "https://example.com/images/sulguni.jpg",
+    "image": "https://images.pexels.com/photos/7368029/pexels-photo-7368029.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Sulguni cheese from Georgia",
     "category": "Cold Dishes"
   },
   {
     "name": "coldDishes.cheeseAssorted",
     "price": 28,
-    "image": "https://example.com/images/cheeseAssorted.jpg",
+    "image": "https://images.pexels.com/photos/543733/pexels-photo-543733.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Assorted cheeses",
     "category": "Cold Dishes"
   },
   {
     "name": "coldDishes.greensAssorted",
     "price": 12,
-    "image": "https://example.com/images/greensAssorted.jpg",
+    "image": "https://images.pexels.com/photos/4113898/pexels-photo-4113898.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Assortment of fresh greens",
     "category": "Cold Dishes"
   },
   {
     "name": "coldDishes.picklesAssorted",
     "price": 15,
-    "image": "https://example.com/images/picklesAssorted.jpg",
+    "image": "https://images.pexels.com/photos/38399724/pexels-photo-38399724.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Assorted pickled vegetables",
     "category": "Cold Dishes"
   },
   {
     "name": "coldDishes.pkhaliAssorted",
     "price": 21,
-    "image": "https://example.com/images/pkhaliAssorted.jpg",
+    "image": "https://images.pexels.com/photos/26756765/pexels-photo-26756765.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Assortment of traditional Georgian pkhali",
     "category": "Cold Dishes"
   },
   {
     "name": "hotDishes.salmonSteak",
     "price": 43.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/36734955/pexels-photo-36734955.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Grilled salmon steak",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.kievCutlet",
     "price": 22.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/10296276/pexels-photo-10296276.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic Kiev cutlet",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.beefOstri",
     "price": 25,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/36829355/pexels-photo-36829355.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Spicy beef stew",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.megruliKharcho",
     "price": 30,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/5175555/pexels-photo-5175555.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Megrelian-style kharcho soup",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.chkmeruliChicken",
     "price": 35,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/24030568/pexels-photo-24030568.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Garlic chicken in milk sauce",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.beefStew",
     "price": 28,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/16699417/pexels-photo-16699417.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Stewed beef with vegetables",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.kharchoSoup",
     "price": 17.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/1833339/pexels-photo-1833339.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Traditional beef soup",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.chikhirtma",
     "price": 16.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/32655226/pexels-photo-32655226.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Georgian chicken soup with eggs and vinegar",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.chakapuliBeef",
     "price": 29,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/22616265/pexels-photo-22616265.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Beef chakapuli with tarragon and white wine",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.chakapuliMushroom",
     "price": 20,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/6166796/pexels-photo-6166796.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Mushroom chakapuli",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.pumpkinSoup",
     "price": 16,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/5662190/pexels-photo-5662190.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Creamy pumpkin soup",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.mushroomSoup",
     "price": 16,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/29653180/pexels-photo-29653180.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Creamy mushroom soup",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.beefRibsAdjika",
     "price": 32.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/36993485/pexels-photo-36993485.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Beef ribs with spicy adjika sauce",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.familyPork",
     "price": 26,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/30892999/pexels-photo-30892999.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Family-style pork dish",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.familyBeef",
     "price": 28.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/29390889/pexels-photo-29390889.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Family-style beef dish",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.familyMushroom",
     "price": 20,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/6646087/pexels-photo-6646087.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Family-style mushroom dish",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.roastChicken",
     "price": 31,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/8408989/pexels-photo-8408989.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Tabaka-style roasted chicken",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.friedSulguni",
     "price": 20,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/9650081/pexels-photo-9650081.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Sulguni cheese fried in panko",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.shrimpPanko",
     "price": 41,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/17628574/pexels-photo-17628574.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Shrimp fried in panko",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.musselsWine",
     "price": 63,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/30649003/pexels-photo-30649003.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Mussels in white wine sauce",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.pelmeniPot",
     "price": 18,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/8601687/pexels-photo-8601687.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Pelmeni dumplings served in a pot",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.lobioPot",
     "price": 12.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/34590138/pexels-photo-34590138.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Lobio beans cooked in a pot",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.risottoShrimp",
     "price": 42,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/5638526/pexels-photo-5638526.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Risotto with shrimp",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.carbonara",
     "price": 24,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/546945/pexels-photo-546945.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic carbonara pasta",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.megruliKupati",
     "price": 26.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/9253733/pexels-photo-9253733.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Megrelian-style kupati sausage",
     "category": "Hot Dishes"
   },
   {
     "name": "hotDishes.chefBurger",
     "price": 45,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/15010285/pexels-photo-15010285.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Chef's special burger with garnish",
     "category": "Hot Dishes"
   },
-  
   {
     "name": "pastries.pizzaPepperoni",
     "price": 18,
-    "image": "https://link.to/pizzaPepperoni.jpg",
+    "image": "https://images.pexels.com/photos/30948829/pexels-photo-30948829.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Pepperoni Pizza",
     "category": "Pastries"
   },
   {
     "name": "pastries.pizzaMargherita",
     "price": 16,
-    "image": "https://link.to/pizzaMargherita.jpg",
+    "image": "https://images.pexels.com/photos/27793841/pexels-photo-27793841.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Margherita Pizza",
     "category": "Pastries"
   },
   {
     "name": "pastries.pizzaMixed",
     "price": 20,
-    "image": "https://link.to/pizzaMixed.jpg",
+    "image": "https://images.pexels.com/photos/25185061/pexels-photo-25185061.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Mixed Pizza",
     "category": "Pastries"
   },
   {
     "name": "pastries.imeruliKhachapuri",
     "price": 18,
-    "image": "https://link.to/imeruliKhachapuri.jpg",
+    "image": "https://images.pexels.com/photos/33637714/pexels-photo-33637714.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Imeretian Khachapuri",
     "category": "Pastries"
   },
   {
     "name": "pastries.megruliKhachapuri",
     "price": 22,
-    "image": "https://link.to/megruliKhachapuri.jpg",
+    "image": "https://images.pexels.com/photos/32592741/pexels-photo-32592741.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Megrelian Khachapuri",
     "category": "Pastries"
   },
   {
     "name": "pastries.royalKhachapuri",
     "price": 25,
-    "image": "https://link.to/royalKhachapuri.jpg",
+    "image": "https://images.pexels.com/photos/34552181/pexels-photo-34552181.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Royal Khachapuri",
     "category": "Pastries"
   },
   {
     "name": "pastries.acharuliKhachapuri",
     "price": 20,
-    "image": "https://link.to/acharuliKhachapuri.jpg",
+    "image": "https://images.pexels.com/photos/15913594/pexels-photo-15913594.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Adjarian Khachapuri",
     "category": "Pastries"
   },
   {
     "name": "pastries.skewerKhachapuri",
     "price": 23,
-    "image": "https://link.to/skewerKhachapuri.jpg",
+    "image": "https://images.pexels.com/photos/17027447/pexels-photo-17027447.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Khachapuri on Skewer",
     "category": "Pastries"
   },
   {
     "name": "pastries.lobiani",
     "price": 12,
-    "image": "https://link.to/lobiani.jpg",
+    "image": "https://images.pexels.com/photos/19870149/pexels-photo-19870149.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Lobiani",
     "category": "Pastries"
   },
   {
     "name": "pastries.chvishtari",
     "price": 13,
-    "image": "https://link.to/chvishtari.jpg",
+    "image": "https://images.pexels.com/photos/8856637/pexels-photo-8856637.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Chvishtari",
     "category": "Pastries"
   },
   {
     "name": "pastries.mchadi",
     "price": 7,
-    "image": "https://link.to/mchadi.jpg",
+    "image": "https://images.pexels.com/photos/30974633/pexels-photo-30974633.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Mchadi",
     "category": "Pastries"
   },
   {
     "name": "pastries.bread",
     "price": 5,
-    "image": "https://link.to/bread.jpg",
+    "image": "https://images.pexels.com/photos/5853234/pexels-photo-5853234.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Bread",
     "category": "Pastries"
   },
-
   {
     "name": "grill.porkShashlik",
     "price": 22,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/13533570/pexels-photo-13533570.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Pork Shashlik (grilled pork skewers)",
     "category": "Grill"
   },
   {
     "name": "grill.beefShashlik",
     "price": 28.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/25463408/pexels-photo-25463408.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Beef Shashlik (grilled beef skewers)",
     "category": "Grill"
   },
   {
     "name": "grill.chickenShashlik",
     "price": 18,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/37667716/pexels-photo-37667716.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Chicken Shashlik (grilled chicken skewers)",
     "category": "Grill"
   },
   {
     "name": "grill.porkRibs",
     "price": 22,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/8250702/pexels-photo-8250702.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Grilled Pork Ribs",
     "category": "Grill"
   },
   {
     "name": "grill.beefKebab",
     "price": 18.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/5175623/pexels-photo-5175623.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Beef Kebab",
     "category": "Grill"
   },
   {
     "name": "grill.chickenKebab",
     "price": 17.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/5175619/pexels-photo-5175619.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Chicken Kebab",
     "category": "Grill"
   },
   {
     "name": "grill.beefKebabSulguni",
     "price": 22,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/8104900/pexels-photo-8104900.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Beef Kebab with Sulguni Cheese",
     "category": "Grill"
   },
   {
     "name": "grill.salmonGrill",
     "price": 35,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/36734954/pexels-photo-36734954.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Grilled Salmon",
     "category": "Grill"
   },
   {
     "name": "grill.troutAdjika",
     "price": 22,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/36304641/pexels-photo-36304641.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Grilled Trout with Adjika Sauce",
     "category": "Grill"
   },
   {
     "name": "grill.frenchFries",
     "price": 8,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/5779487/pexels-photo-5779487.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "French Fries",
     "category": "Grill"
   },
   {
     "name": "grill.mexicanPotatoes",
     "price": 13.5,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/30641037/pexels-photo-30641037.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Mexican Style Potatoes",
     "category": "Grill"
   },
   {
     "name": "grill.ribeyePepper",
     "price": 60,
-    "image": "https://link.to/image.jpg",
+    "image": "https://images.pexels.com/photos/31064158/pexels-photo-31064158.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Ribeye Steak with Pepper Sauce",
     "category": "Grill"
   },
   {
     "name": "sauces.tomatoSauce",
     "price": 4,
-    "image": "https://example.com/images/tomatoSauce.jpg",
+    "image": "https://images.pexels.com/photos/35428719/pexels-photo-35428719.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Tomato-based sauce",
     "category": "Sauces"
   },
   {
     "name": "sauces.tkemali",
     "price": 4,
-    "image": "https://example.com/images/tkemali.jpg",
+    "image": "https://images.pexels.com/photos/33800365/pexels-photo-33800365.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Traditional sour plum sauce",
     "category": "Sauces"
   },
   {
     "name": "sauces.kindsvari",
     "price": 4,
-    "image": "https://example.com/images/kindsvari.jpg",
+    "image": "https://images.pexels.com/photos/6546566/pexels-photo-6546566.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Coriander-flavored sauce",
     "category": "Sauces"
   },
   {
     "name": "sauces.ketchup",
     "price": 4,
-    "image": "https://example.com/images/ketchup.jpg",
+    "image": "https://images.pexels.com/photos/4728855/pexels-photo-4728855.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic ketchup",
     "category": "Sauces"
   },
   {
     "name": "sauces.mexicanSauce",
     "price": 5,
-    "image": "https://example.com/images/mexicanSauce.jpg",
+    "image": "https://images.pexels.com/photos/5737365/pexels-photo-5737365.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Spicy Mexican sauce",
     "category": "Sauces"
   },
   {
     "name": "sauces.sweetSpicySauce",
     "price": 5,
-    "image": "https://example.com/images/sweetSpicySauce.jpg",
+    "image": "https://images.pexels.com/photos/28371796/pexels-photo-28371796.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Sweet and spicy sauce",
     "category": "Sauces"
   },
   {
     "name": "sauces.bbqSauce",
     "price": 5,
-    "image": "https://example.com/images/bbqSauce.jpg",
+    "image": "https://images.pexels.com/photos/8251356/pexels-photo-8251356.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Barbecue sauce",
     "category": "Sauces"
   },
   {
     "name": "coffeeTea.espresso",
     "price": 6,
-    "image": "https://example.com/images/espresso.jpg",
+    "image": "https://images.pexels.com/photos/19873648/pexels-photo-19873648.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Strong espresso shot",
     "category": "Coffee & Tea"
   },
   {
     "name": "coffeeTea.cappuccino",
     "price": 10,
-    "image": "https://example.com/images/cappuccino.jpg",
+    "image": "https://images.pexels.com/photos/6747870/pexels-photo-6747870.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Cappuccino with milk foam",
     "category": "Coffee & Tea"
   },
   {
     "name": "coffeeTea.americano",
     "price": 8,
-    "image": "https://example.com/images/americano.jpg",
+    "image": "https://images.pexels.com/photos/7855562/pexels-photo-7855562.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic Americano coffee",
     "category": "Coffee & Tea"
   },
   {
     "name": "coffeeTea.icedAmericano",
     "price": 8,
-    "image": "https://example.com/images/icedAmericano.jpg",
+    "image": "https://images.pexels.com/photos/38426418/pexels-photo-38426418.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Chilled Americano",
     "category": "Coffee & Tea"
   },
   {
     "name": "coffeeTea.icedCoffee",
     "price": 12,
-    "image": "https://example.com/images/icedCoffee.jpg",
+    "image": "https://images.pexels.com/photos/35229818/pexels-photo-35229818.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Iced coffee with ice cream",
     "category": "Coffee & Tea"
   },
   {
     "name": "coffeeTea.blackTea",
     "price": 4,
-    "image": "https://example.com/images/blackTea.jpg",
+    "image": "https://images.pexels.com/photos/1493080/pexels-photo-1493080.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Hot black tea",
     "category": "Coffee & Tea"
   },
   {
     "name": "coffeeTea.greenTea",
     "price": 4,
-    "image": "https://example.com/images/greenTea.jpg",
+    "image": "https://images.pexels.com/photos/33526960/pexels-photo-33526960.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Refreshing green tea",
     "category": "Coffee & Tea"
   },
   {
     "name": "cocktails.ginTonic",
     "price": 18,
-    "image": "https://example.com/images/ginTonic.jpg",
+    "image": "https://images.pexels.com/photos/7841374/pexels-photo-7841374.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic Gin & Tonic",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.aperolSpritz",
     "price": 20,
-    "image": "https://example.com/images/aperolSpritz.jpg",
+    "image": "https://images.pexels.com/photos/20094378/pexels-photo-20094378.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Refreshing Aperol Spritz",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.mojito",
     "price": 20,
-    "image": "https://example.com/images/mojito.jpg",
+    "image": "https://images.pexels.com/photos/33129959/pexels-photo-33129959.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Minty Mojito cocktail",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.cubaLibre",
     "price": 20,
-    "image": "https://example.com/images/cubaLibre.jpg",
+    "image": "https://images.pexels.com/photos/34947136/pexels-photo-34947136.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Cuba Libre with rum and cola",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.negroni",
     "price": 20,
-    "image": "https://example.com/images/negroni.jpg",
+    "image": "https://images.pexels.com/photos/27851286/pexels-photo-27851286.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic Negroni cocktail",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.vodkaEnergy",
     "price": 18,
-    "image": "https://example.com/images/vodkaEnergy.jpg",
+    "image": "https://images.pexels.com/photos/16148035/pexels-photo-16148035.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Vodka mixed with energy drink",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.longIslandTea",
     "price": 28,
-    "image": "https://example.com/images/longIslandTea.jpg",
+    "image": "https://images.pexels.com/photos/19969199/pexels-photo-19969199.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Long Island Iced Tea",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.longIslandEnergy",
     "price": 30,
-    "image": "https://example.com/images/longIslandEnergy.jpg",
+    "image": "https://images.pexels.com/photos/19789236/pexels-photo-19789236.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Long Island with energy drink",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.margarita",
     "price": 20,
-    "image": "https://example.com/images/margarita.jpg",
+    "image": "https://images.pexels.com/photos/29463223/pexels-photo-29463223.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Classic Margarita cocktail",
     "category": "Cocktails"
   },
   {
     "name": "cocktails.mimosa",
     "price": 20,
-    "image": "https://example.com/images/mimosa.jpg",
+    "image": "https://images.pexels.com/photos/1772974/pexels-photo-1772974.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Mimosa with orange juice and sparkling wine",
     "category": "Cocktails"
   },
   {
     "name": "softDrinks.coke",
     "price": 6,
-    "image": "https://example.com/images/coke.jpg",
+    "image": "https://images.pexels.com/photos/4113617/pexels-photo-4113617.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Coca-Cola",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.cokeZero",
     "price": 6,
-    "image": "https://example.com/images/cokeZero.jpg",
+    "image": "https://images.pexels.com/photos/4113623/pexels-photo-4113623.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Coca-Cola Zero Sugar",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.fanta",
     "price": 6,
-    "image": "https://example.com/images/fanta.jpg",
+    "image": "https://images.pexels.com/photos/17408558/pexels-photo-17408558.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Orange flavored Fanta",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.sprite",
     "price": 6,
-    "image": "https://example.com/images/sprite.jpg",
+    "image": "https://images.pexels.com/photos/31407516/pexels-photo-31407516.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Refreshing Sprite",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.burn",
     "price": 7,
-    "image": "https://example.com/images/burn.jpg",
+    "image": "https://images.pexels.com/photos/8066771/pexels-photo-8066771.png?auto=compress&cs=tinysrgb&w=800",
     "description": "Energy Drink 'Burn'",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.kapi",
     "price": 8,
-    "image": "https://example.com/images/kapi.jpg",
+    "image": "https://images.pexels.com/photos/8679349/pexels-photo-8679349.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Kapi juice drink",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.icedTea",
     "price": 8,
-    "image": "https://example.com/images/icedTea.jpg",
+    "image": "https://images.pexels.com/photos/6413689/pexels-photo-6413689.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Bottled iced tea",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.schweppes",
     "price": 7,
-    "image": "https://example.com/images/schweppes.jpg",
+    "image": "https://images.pexels.com/photos/10616180/pexels-photo-10616180.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Schweppes tonic water",
     "category": "Soft Drinks"
   },
   {
     "name": "softDrinks.water",
     "price": 4,
-    "image": "https://example.com/images/water.jpg",
+    "image": "https://images.pexels.com/photos/1540235/pexels-photo-1540235.jpeg?auto=compress&cs=tinysrgb&w=800",
     "description": "Still bottled water",
     "category": "Soft Drinks"
   }
-
-
-
-
-
-
-
-
-
 ]

@@ -1,29 +1,120 @@
-<div class="admin-container">
-  <h2>Manage Meals</h2>
+<app-panel-auth
+  requiredRole="manager"
+  panelTitle="Manager Login"
+  panelSubtitle="Sign in with your manager account to manage the menu."
+>
+<div class="panel">
 
-<!-------------------------------------------------------------------------FORM TO EDIT THE MENU------------------------------------------------------------------------------------------>
-  <form (ngSubmit)="onSubmit()" #mealForm="ngForm" class="meal-form">
-    <input type="text" name="image" [(ngModel)]="meal.image" placeholder="Image URL" required />
-    <input type="text" name="name" [(ngModel)]="meal.name" placeholder="Meal Name" required />
-    <input type="number" name="price" [(ngModel)]="meal.price" placeholder="Price" required />
-    <input type="text" name="description" [(ngModel)]="meal.description" placeholder="Description" required />
-    <input type="text" name="category" [(ngModel)]="meal.category" placeholder="Category" required />
-    <button type="submit">{{ editMode ? 'Update' : 'Add' }} Meal</button>
-    <button type="button" *ngIf="editMode" (click)="cancelEdit()">Cancel</button>
-  </form>
+  <div class="panel-header">
+    <div>
+      <h1>Manage Menu</h1>
+      <p class="subtitle">Add, edit, or remove items from the live menu</p>
+    </div>
+    <div class="header-actions">
+      <a routerLink="/adminpanelss/reservations" class="link-btn">View Reservations &rarr;</a>
+    </div>
+  </div>
 
-<!-------------------------------------------------------------------------LIST OF ITEMS IN MENU------------------------------------------------------------------------------------------>
-  <ul class="meal-list">
-    <li *ngFor="let item of meals">
-      <img [src]="item.image" alt="{{ item.name }}" />
-      <div class="info">
-        <h3>{{ item.name }}</h3>
-        <p>{{ item.description }}</p>
-        <p><strong>Price:</strong> ${{ item.price }}</p>
-        <p><strong>Category:</strong> {{ item.category }}</p>
-        <button (click)="editMeal(item)">Edit</button>
-        <button (click)="deleteMeal(item.id)">Delete</button>
+  <!-------------------------------------------------------------------------FORM TO EDIT THE MENU------------------------------------------------------------------------------------------>
+  <section class="form-card" id="meal-form-card">
+    <h2>{{ editMode ? 'Edit Meal' : 'Add New Meal' }}</h2>
+
+    <form (ngSubmit)="onSubmit()" #mealForm="ngForm" class="meal-form">
+      <div class="form-grid">
+        <div class="field">
+          <label>Meal Name (English)</label>
+          <input type="text" name="name" [(ngModel)]="meal.name" placeholder="e.g. Caesar with Chicken" required />
+        </div>
+
+        <div class="field">
+          <label>Meal Name (Georgian)</label>
+          <input type="text" name="nameKa" [(ngModel)]="meal.nameKa" placeholder="e.g. ცეზარი ქათმის" />
+        </div>
+
+        <div class="field">
+          <label>Price (&#x20be;)</label>
+          <input type="number" name="price" [(ngModel)]="meal.price" placeholder="0" required min="0" step="0.5" />
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <input type="text" name="category" [(ngModel)]="meal.category" placeholder="e.g. Salads" required list="category-list" />
+          <datalist id="category-list">
+            <option *ngFor="let c of categories" [value]="c"></option>
+          </datalist>
+        </div>
+
+        <div class="field">
+          <label>Image URL</label>
+          <input type="text" name="image" [(ngModel)]="meal.image" placeholder="https://..." required />
+        </div>
+
+        <div class="field full-width">
+          <label>Description</label>
+          <textarea name="description" [(ngModel)]="meal.description" placeholder="Short description shown on the menu" rows="2" required></textarea>
+        </div>
       </div>
-    </li>
-  </ul>
+
+      <div class="form-preview" *ngIf="meal.image">
+        <img [src]="meal.image" alt="Preview" />
+        <span class="preview-label">Preview</span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary-btn" [disabled]="!mealForm.valid">{{ editMode ? 'Save Changes' : 'Add Meal' }}</button>
+        <button type="button" class="cancel-btn" *ngIf="editMode" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+  </section>
+
+  <!-------------------------------------------------------------------------LIST OF ITEMS IN MENU------------------------------------------------------------------------------------------>
+  <section class="list-section">
+    <div class="list-toolbar">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search meals by name or description…"
+        [(ngModel)]="searchTerm"
+        name="search"
+      />
+      <span class="result-count">{{ filteredMeals.length }} of {{ meals.length }} items</span>
+    </div>
+
+    <div class="category-filters">
+      <button type="button" class="filter-chip" [class.active]="activeCategory === 'All'" (click)="setCategoryFilter('All')">All</button>
+      <button
+        type="button"
+        class="filter-chip"
+        *ngFor="let c of categories"
+        [class.active]="activeCategory === c"
+        (click)="setCategoryFilter(c)"
+      >
+        {{ c }}
+      </button>
+    </div>
+
+    <p class="hint-text" *ngIf="loadingMeals">Loading menu…</p>
+
+    <p class="hint-text" *ngIf="!loadingMeals && filteredMeals.length === 0">No meals match your search.</p>
+
+    <div class="meal-grid">
+      <div class="meal-card" *ngFor="let item of filteredMeals" [class.editing]="editMode && currentEditId === item.id">
+        <img [src]="item.image" [alt]="item.name" />
+        <div class="meal-card-body">
+          <h3>{{ displayName(item) }}</h3>
+          <p class="meal-desc">{{ item.description }}</p>
+          <div class="meal-meta">
+            <span class="price-badge">{{ item.price }} &#x20be;</span>
+            <span class="category-badge">{{ item.category }}</span>
+          </div>
+          <div class="meal-actions">
+            <button type="button" class="action-btn edit" (click)="editMeal(item)">Edit</button>
+            <button type="button" class="action-btn delete" (click)="deleteMeal(item.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
+</app-panel-auth>

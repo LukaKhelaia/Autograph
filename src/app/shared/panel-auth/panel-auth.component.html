@@ -1,0 +1,48 @@
+<!-- Waiting for Firebase to restore an existing session -->
+<div class="login-screen" *ngIf="checking">
+  <div class="login-card">
+    <p class="login-subtitle checking-text">Checking your session…</p>
+  </div>
+</div>
+
+<ng-container *ngIf="!checking">
+  <ng-container *ngIf="authenticated; else loginForm">
+    <div class="logout-bar">
+      <span class="signed-in-as" *ngIf="profile?.email">Signed in as {{ profile?.email }}</span>
+      <button type="button" class="logout-btn" (click)="logout()">Log Out</button>
+    </div>
+    <ng-content></ng-content>
+  </ng-container>
+
+  <ng-template #loginForm>
+    <div class="login-screen">
+      <div class="login-card">
+        <h2>{{ panelTitle }}</h2>
+        <p class="login-subtitle">{{ panelSubtitle }}</p>
+
+        <form (ngSubmit)="login()" #loginFormRef="ngForm">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" name="password" [(ngModel)]="password" required autocomplete="current-password" />
+          </div>
+
+          <p class="error-text" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+          <button type="submit" class="login-btn" [disabled]="!loginFormRef.valid || submitting">
+            {{ submitting ? 'Signing in…' : 'Log In' }}
+          </button>
+        </form>
+
+        <!-- Signed in, but with an account that can't open this particular panel -->
+        <p class="switch-account" *ngIf="signedInWithoutAccess">
+          Signed in as {{ profile?.email }}.
+          <button type="button" class="link-button" (click)="logout()">Use a different account</button>
+        </p>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>

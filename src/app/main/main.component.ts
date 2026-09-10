@@ -11,12 +11,13 @@ import {
   stagger,
 } from '@angular/animations';
 import { RouterModule } from '@angular/router';
-import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [NgClass, NgFor,CommonModule,RouterModule,TranslatePipe,TranslateModule],
+  imports: [NgClass, NgFor,CommonModule,RouterModule,HeaderComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
     animations: [
@@ -24,8 +25,8 @@ import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate
   transition(':enter', [
     query('.menu-card', [
       style({ opacity: 0, transform: 'scale(0.5)' }),
-      stagger(100, [
-        animate('400ms ease', style({ opacity: 1, transform: 'scale(1)' }))
+      stagger(20, [
+        animate('300ms ease', style({ opacity: 1, transform: 'scale(1)' }))
       ])
     ], { optional: true })
   ]),
@@ -38,23 +39,17 @@ export class MainComponent implements  AfterViewInit {
 allItems: MenuItem[] = [];
 filteredItems: MenuItem[] = [];
 menuVisible = true;
+menuLoading = true;
 selectedCategory: string = '';
 showBackToTop: boolean = false;
 selectedItem: string = 'All';
 menuItems: string[] = ['All', 'Salads', 'Cold Dishes', 'Hot Dishes', 'Pastries', 'Grill', 'Sauces', 'Drinks'];
 drinkSubCategories: string[] = ['Coffee & Tea', 'Cocktails', 'Soft Drinks'];
 selectedSubCategory: string = '';
-selectedLanguage: string = 'en';
 
 constructor( private menuService: MenuService, @Inject(PLATFORM_ID) private platformId: Object,  private translateService: TranslateService) 
 {
-this.translateService.setDefaultLang(this.selectedLanguage) // Set default language for translations
-}
-
-// Change app language
-swichLanguage(lang: string) {
-  this.translateService.use(lang);
-  this.selectedLanguage = lang;
+this.translateService.setDefaultLang('en'); // Set default language for translations (language switching itself lives in HeaderComponent)
 }
 
 // Fetch menu items on component initialization
@@ -67,9 +62,11 @@ ngOnInit(): void {
         showDescription: false // Add flag to toggle description
       }));
       this.filteredItems = this.allItems;
+      this.menuLoading = false;
     },
     error: (err) => {
       console.error('Failed to fetch menu items', err);
+      this.menuLoading = false;
     }
   });
 }
@@ -136,6 +133,18 @@ toggleDescription(item: any): void {
   item.showDescription = !item.showDescription;
 }
 
+// The seeded menu items store a dotted translation key in `name` (e.g.
+// "salads.cucumberTomato"), resolved via the translate pipe against
+// public/i18n/en.json / ka.json. Meals added or renamed through the admin
+// panel use a plain English name plus an optional Georgian name instead, so
+// only fall back to the translation lookup when `name` still looks like a key.
+displayName(item: MenuItem): string {
+  if (/^[a-zA-Z]+\.[a-zA-Z0-9]+$/.test(item.name)) {
+    return this.translateService.instant('items.' + item.name);
+  }
+  return (this.translateService.currentLang === 'ka' && item.nameKa) ? item.nameKa : item.name;
+}
+
 // Scroll smoothly to the top of the page
 scrollToTop(): void {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -164,12 +173,6 @@ ngAfterViewInit(): void {
 
     const menuBtn = document.getElementById('menuBtn');
     menuBtn?.addEventListener('click', scrollToMenu);
-
-    const menuNavLink = document.getElementById('menuNavLink');
-    menuNavLink?.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollToMenu();
-    });
 
     // Show "Back to Top" button after scrolling 200px
     window.addEventListener('scroll', () => {

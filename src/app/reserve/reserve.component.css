@@ -1,0 +1,447 @@
+.reserve-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 80vh;
+  padding: 20px 40px 80px;
+}
+
+.reserve-hero {
+  text-align: center;
+  max-width: 600px;
+  margin: 20px 0 40px;
+  color: white;
+}
+
+.reserve-hero h1 {
+  font-size: 2.4rem;
+  color: wheat;
+  margin-bottom: 12px;
+}
+
+.reserve-hero p {
+  color: #d8d3ce;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.reserve-card {
+  width: 100%;
+  max-width: 720px;
+  background-color: rgba(37, 42, 43, 0.6);
+  border: 1px solid wheat;
+  border-radius: 14px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.form-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Reserve roughly the height a row of table chips takes, so choosing a time
+   swaps the prompt for the tables without shunting the rest of the form
+   (and the Reserve button) up or down. */
+.tables-block {
+  min-height: 96px;
+}
+
+.block-label {
+  color: wheat;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.chip-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.chip-row.wrap {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+.chip {
+  font-size: 15px;
+  padding: 10px 16px;
+  color: white;
+  background-color: rgb(37, 42, 43);
+  border: 1px solid rgb(37, 42, 43);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chip:hover {
+  color: wheat;
+  background-color: rgba(37, 42, 43, 0.5);
+  border: 1px solid wheat;
+}
+
+.chip.active {
+  background-color: wheat;
+  color: black;
+  border: 1px solid wheat;
+}
+
+.date-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 64px;
+}
+
+.chip-top {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.chip-bottom {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.table-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 96px;
+}
+
+.table-capacity {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.guests-stepper {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.stepper-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid wheat;
+  background-color: rgb(37, 42, 43);
+  color: wheat;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background-color: wheat;
+  color: black;
+}
+
+.stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.guests-count {
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+.hint-text {
+  color: #cfc9c3;
+  font-size: 14px;
+}
+
+.hint-text.warning {
+  color: #e7b45c;
+}
+
+.hint-text.error {
+  color: #e07a5f;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.contact-grid input,
+.contact-grid textarea {
+  grid-column: span 1;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 222, 179, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.contact-grid textarea {
+  grid-column: span 2;
+  resize: vertical;
+}
+
+.contact-grid input:focus,
+.contact-grid textarea:focus {
+  border-color: wheat;
+}
+
+.contact-grid input::placeholder,
+.contact-grid textarea::placeholder {
+  color: #a8a29b;
+}
+
+.primary-btn {
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: 1px solid wheat;
+  background-color: wheat;
+  color: black;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  align-self: center;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background-color: rgba(245, 222, 179, 0.8);
+}
+
+.primary-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+.success-card {
+  align-items: center;
+  text-align: center;
+  padding: 48px 32px;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: wheat;
+  color: black;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.success-card h2 {
+  color: wheat;
+  font-size: 26px;
+}
+
+.success-card p {
+  color: white;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.view-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+  width: 100%;
+  max-width: 720px;
+}
+
+.view-tab {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid wheat;
+  background-color: rgba(37, 42, 43, 0.6);
+  color: wheat;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-tab:hover {
+  background-color: rgba(245, 222, 179, 0.15);
+}
+
+.view-tab.active {
+  background-color: wheat;
+  color: black;
+}
+
+.lookup-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lookup-row input {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 222, 179, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.lookup-row input:focus {
+  border-color: wheat;
+}
+
+.lookup-row input::placeholder {
+  color: #a8a29b;
+}
+
+.reservation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reservation-item {
+  border: 1px solid rgba(245, 222, 179, 0.35);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.reservation-item.cancelled {
+  opacity: 0.55;
+}
+
+.reservation-item.past:not(.cancelled) {
+  opacity: 0.75;
+}
+
+.reservation-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.reservation-date {
+  color: wheat;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.reservation-meta {
+  color: #d8d3ce;
+  font-size: 14px;
+}
+
+.reservation-status {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background-color: rgba(224, 122, 95, 0.2);
+  color: #e07a5f;
+  border: 1px solid rgba(224, 122, 95, 0.5);
+}
+
+.reservation-status.past {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #b8b3ac;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.reservation-notes {
+  color: #cfc9c3;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.cancel-btn {
+  align-self: flex-start;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #e07a5f;
+  background-color: transparent;
+  color: #e07a5f;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background-color: rgba(224, 122, 95, 0.15);
+}
+
+.cancel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 599px) {
+  .reserve-main {
+    padding: 10px 16px 60px;
+  }
+
+  .reserve-card {
+    padding: 20px;
+  }
+
+  .reserve-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid textarea {
+    grid-column: span 1;
+  }
+
+  .lookup-row {
+    flex-direction: column;
+  }
+
+  .primary-btn {
+    width: 100%;
+  }
+}
