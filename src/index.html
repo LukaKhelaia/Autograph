@@ -4,10 +4,15 @@
   <meta charset="utf-8">
   <title>Autograph</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Tints the browser's own UI (the bar behind the status area on phones) to
-       match the site, instead of it defaulting to white against a dark page. -->
-  <meta name="theme-color" content="#141617">
+  <!-- viewport-fit=cover lets the page paint into the phone's safe areas (behind
+       the status bar and the home indicator) instead of stopping short of them. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Tints the browser's own chrome — the status bar strip and the address bar.
+       That chrome can only ever be a flat colour; no page image can reach it. This
+       value is measured, not guessed: background2.jpg averages rgb(19,19,19), and
+       body::after lays rgba(0,0,0,.6) over it, so the page actually renders at
+       rgb(8,8,8). Matching that makes the strips hard to pick out by eye. -->
+  <meta name="theme-color" content="#080808">
   <link rel="icon" type="image/x-icon" href="assets/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
