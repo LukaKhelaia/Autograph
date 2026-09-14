@@ -11,10 +11,13 @@
    element only ever covers the viewport box. Everything outside it — the area
    behind a phone's status bar, and the region exposed when the page rubber-bands
    past its end — is painted by the browser's own canvas, which is white unless a
-   colour is set here. Colouring the root and body keeps those edges matching the
-   site instead of flashing white on mobile. */
-html,
-body {
+   colour is set. Setting one here fills those edges with the darkest tone of the
+   background image, so they blend in instead of flashing white on mobile.
+
+   This belongs on <html> ONLY. Putting it on <body> as well hides the background
+   image entirely: body::before sits at z-index -10, and a body background paints
+   on top of negative-z-index children, covering the artwork. */
+html {
   background-color: rgb(20, 22, 23);
 }
 
