@@ -7,32 +7,24 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* The site's background image lives on a fixed pseudo-element below, and a fixed
-   element only ever covers the viewport box. Everything outside it — the area
-   behind a phone's status bar, and the region exposed when the page rubber-bands
-   past its end — is painted by the browser's own canvas, which is white unless a
-   colour is set. Setting one here fills those edges with the darkest tone of the
-   background image, so they blend in instead of flashing white on mobile.
+/* The canvas colour. This is what shows in any area the fixed background layer
+   below cannot reach — behind a phone's status bar, and the strip revealed when
+   the page rubber-bands past its end. Without it those areas paint white.
 
-   This belongs on <html> ONLY. Putting it on <body> as well hides the background
-   image entirely: body::before sits at z-index -10, and a body background paints
-   on top of negative-z-index children, covering the artwork. */
+   Colour ONLY, no image: see the note inside. */
 html {
-  /* Fallback tone for before the image loads. Measured from background2.jpg
-     (avg rgb(19,19,19)) with body::after's 60% black overlay applied. */
-  background-color: rgb(8, 8, 8);
+  /* Flat colour ONLY — deliberately no background image here.
+     iOS Safari doesn't truly support background-attachment: fixed; it sizes such
+     a background against the whole document instead of the screen. On a long page
+     (the menu runs to ~100 dishes) that magnifies the image enormously, and the
+     sliver visible at the screen edge came out as a flat grey patch with no
+     texture, while short pages looked fine. There's no attachment value that
+     avoids it, so the canvas carries colour only and body::before below — a fixed
+     ELEMENT, which iOS does handle correctly — carries the artwork.
 
-  /* Same artwork, and the same darkening, as the body::before / body::after pair
-     below — so the strips only the canvas can reach carry the sand texture too
-     rather than a flat colour. The gradient stands in for body::after; without
-     it these edges would come out lighter than the rest of the page. */
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('assets/background2.jpg');
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+     This tone is measured, not guessed: background2.jpg averages rgb(19,19,19),
+     and body::after lays 60% black over it, giving rgb(8,8,8). */
+  background-color: rgb(8, 8, 8);
 }
 
 /* Body styles */
@@ -60,8 +52,8 @@ body::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
-  height: 100lvh;
+  height: calc(100vh + 160px);
+  height: calc(100lvh + 160px);
   background: url('assets/background2.jpg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
@@ -84,32 +76,10 @@ body::after {
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
-  height: 100lvh;
+  height: calc(100vh + 160px);
+  height: calc(100lvh + 160px);
   background-color: rgba(0, 0, 0, 0.6);
   z-index: -5;
-  pointer-events: none;
-}
-
-/* Masks the strip behind the phone's home indicator.
-   Because the viewport meta uses viewport-fit=cover, the page now extends into
-   that strip — which means menu cards and headings scroll through it and show as
-   sliced-off fragments under the address bar. This sits on top of that strip in
-   the page's own tone, so the area reads as plain background instead.
-
-   It is zero-height on anything without a safe-area inset (desktop, Android
-   without gesture insets), so it costs nothing elsewhere. pointer-events: none
-   keeps taps passing through, and the z-index stays below the mobile nav drawer
-   (1050+) so an open menu still covers the full screen height. */
-html::after {
-  content: '';
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: env(safe-area-inset-bottom, 0px);
-  background-color: rgb(8, 8, 8);
-  z-index: 1000;
   pointer-events: none;
 }
 
@@ -126,15 +96,9 @@ html::after {
 }
 
 
-/* For older devices that might not support fixed on ::before.
-
-   NOTE: <html> must NOT be included here. With `scroll`, the canvas background is
-   sized to cover the whole *document* rather than the screen — so on a long page
-   like the menu (nearly a hundred dishes) the image gets stretched over tens of
-   thousands of pixels, and the strip visible at the screen edges ends up being a
-   hugely magnified patch of it that reads as flat grey with no texture. Short
-   pages looked fine, long ones didn't. Keeping it `fixed` sizes it to the
-   viewport, so the edges match the page on every route. */
+/* iOS doesn't honour background-attachment: fixed. Using `scroll` here sizes the
+   image against body::before's own box — which is a fixed, screen-sized element —
+   so the artwork stays scaled to the screen instead of the document. */
 @media (max-width: 768px) {
   body::before {
     background-attachment: scroll;
