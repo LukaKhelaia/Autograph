@@ -45,14 +45,23 @@ body {
   overflow-x: hidden;
 }
 
-/* Background image on a fixed pseudo-element to avoid mobile issues */
+/* Background image on a fixed pseudo-element to avoid mobile issues.
+
+   Height, not `bottom: 0`, on purpose. For a fixed element "bottom" means the
+   bottom of the LAYOUT viewport, which on a phone stops where the browser's
+   toolbar begins — so the strip behind that toolbar was never covered by this
+   image at all, and fell through to whatever sat behind it. 100lvh is the large
+   viewport height: the full screen, ignoring collapsible browser UI. That makes
+   the background tall enough to reach the real bottom edge.
+   (100vh first as a fallback for older browsers without lvh.) */
 body::before {
   content: '';
   position: fixed;
-  top: 0; 
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  height: 100vh;
+  height: 100lvh;
   background: url('assets/background2.jpg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
@@ -66,14 +75,17 @@ body::before {
 
 }
 
-/* Overlay for darkening background */
+/* Overlay for darkening background. Matches the height of body::before above so
+   the darkening reaches the same full-screen extent — otherwise the strip behind
+   the toolbar would show the image undarkened and look lighter than the page. */
 body::after {
   content: '';
   position: fixed;
-  top: 0; 
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  height: 100vh;
+  height: 100lvh;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: -5;
   pointer-events: none;
