@@ -115,11 +115,16 @@ html::after {
 
 
 /* For older devices that might not support fixed on ::before.
-   The canvas background on <html> gets the same treatment, since mobile browsers
-   mis-size fixed backgrounds in the same way. */
+
+   NOTE: <html> must NOT be included here. With `scroll`, the canvas background is
+   sized to cover the whole *document* rather than the screen — so on a long page
+   like the menu (nearly a hundred dishes) the image gets stretched over tens of
+   thousands of pixels, and the strip visible at the screen edges ends up being a
+   hugely magnified patch of it that reads as flat grey with no texture. Short
+   pages looked fine, long ones didn't. Keeping it `fixed` sizes it to the
+   viewport, so the edges match the page on every route. */
 @media (max-width: 768px) {
-  body::before,
-  html {
+  body::before {
     background-attachment: scroll;
   }
 }
