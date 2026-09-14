@@ -101,3 +101,22 @@ body::after {
     background-attachment: scroll;
   }
 }
+
+@media (max-width: 768px) {
+  body::before,
+  html {
+    background-attachment: scroll;
+  }
+}
+
+html::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: env(safe-area-inset-bottom, 0px);
+  background-color: rgb(8, 8, 8);
+  z-index: 1000;
+  pointer-events: none;
+}
