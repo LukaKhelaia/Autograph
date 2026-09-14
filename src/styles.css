@@ -79,6 +79,28 @@ body::after {
   pointer-events: none;
 }
 
+/* Masks the strip behind the phone's home indicator.
+   Because the viewport meta uses viewport-fit=cover, the page now extends into
+   that strip — which means menu cards and headings scroll through it and show as
+   sliced-off fragments under the address bar. This sits on top of that strip in
+   the page's own tone, so the area reads as plain background instead.
+
+   It is zero-height on anything without a safe-area inset (desktop, Android
+   without gesture insets), so it costs nothing elsewhere. pointer-events: none
+   keeps taps passing through, and the z-index stays below the mobile nav drawer
+   (1050+) so an open menu still covers the full screen height. */
+html::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: env(safe-area-inset-bottom, 0px);
+  background-color: rgb(8, 8, 8);
+  z-index: 1000;
+  pointer-events: none;
+}
+
 /* Shown for the moment before the app boots. It used to be white, which meant a
    bright flash on every visit to an otherwise very dark site. */
 #preloader {
@@ -100,23 +122,4 @@ body::after {
   html {
     background-attachment: scroll;
   }
-}
-
-@media (max-width: 768px) {
-  body::before,
-  html {
-    background-attachment: scroll;
-  }
-}
-
-html::after {
-  content: '';
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: env(safe-area-inset-bottom, 0px);
-  background-color: rgb(8, 8, 8);
-  z-index: 1000;
-  pointer-events: none;
 }
