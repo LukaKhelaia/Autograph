@@ -50,14 +50,27 @@ nav {
 }
 
 .flag {
-  width: 28px;
+  /* Sized against the nav text's cap height rather than its font-size. Matching
+     the full 28px font-size made the flag read as noticeably larger than the
+     words beside it, because cap height is well short of font-size. */
+  width: 22px;
+  padding: 0;
   background: none;
   border: none;
   cursor: pointer;
+  /* An <svg> is an inline element by default, so it sits on the text baseline
+     and reserves descender space beneath itself — which is what pushed the flag
+     above the centre line of "Menu" and "Reserve". Making the button a flex box
+     with a block-level svg removes that gap and centres it properly. */
+  display: flex;
+  align-items: center;
 }
 
 .flag svg {
-  border-radius: 4px;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
 }
 
 nav a {

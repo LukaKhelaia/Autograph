@@ -7,6 +7,17 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* The site's background image lives on a fixed pseudo-element below, and a fixed
+   element only ever covers the viewport box. Everything outside it — the area
+   behind a phone's status bar, and the region exposed when the page rubber-bands
+   past its end — is painted by the browser's own canvas, which is white unless a
+   colour is set here. Colouring the root and body keeps those edges matching the
+   site instead of flashing white on mobile. */
+html,
+body {
+  background-color: rgb(20, 22, 23);
+}
+
 /* Body styles */
 body {
   margin: 0;
@@ -51,13 +62,15 @@ body::after {
   pointer-events: none;
 }
 
+/* Shown for the moment before the app boots. It used to be white, which meant a
+   bright flash on every visit to an otherwise very dark site. */
 #preloader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: white; 
+  background-color: rgb(20, 22, 23);
   z-index: 9999;
 }
 
