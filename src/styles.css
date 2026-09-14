@@ -18,7 +18,20 @@
    image entirely: body::before sits at z-index -10, and a body background paints
    on top of negative-z-index children, covering the artwork. */
 html {
+  /* Fallback tone, in case the image hasn't loaded yet. */
   background-color: rgb(20, 22, 23);
+
+  /* Same artwork, and the same darkening, as the body::before / body::after pair
+     below — so the strips only the canvas can reach carry the sand texture too
+     rather than a flat colour. The gradient stands in for body::after; without
+     it these edges would come out lighter than the rest of the page. */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('assets/background2.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Body styles */
@@ -78,9 +91,12 @@ body::after {
 }
 
 
-/* For older devices that might not support fixed on ::before */
+/* For older devices that might not support fixed on ::before.
+   The canvas background on <html> gets the same treatment, since mobile browsers
+   mis-size fixed backgrounds in the same way. */
 @media (max-width: 768px) {
-  body::before {
+  body::before,
+  html {
     background-attachment: scroll;
   }
 }
